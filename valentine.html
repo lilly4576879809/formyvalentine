@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        /* General Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #a2f5b6, #ffc6e2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Hearts */
+        .heart {
+            position: absolute;
+            width: 120px;
+            height: 110px;
+            background-color: #ff6b81;
+            transform: rotate(-45deg);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .heart.green {
+            background-color: #7ed6a4;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 110px;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            background-color: inherit;
+            top: -60px;
+            left: 0;
+        }
+
+        .heart::after {
+            background-color: inherit;
+            left: 60px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-30px) rotate(-45deg);
+                opacity: 0.7;
+            }
+        }
+
+        /* Center Content */
+        .container {
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .title {
+            font-size: 3rem;
+            color: #ff6b81;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #67c796;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(45deg, #7ed6a4, #ff8eb5);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #ff8eb5, #7ed6a4);
+        }
+
+        /* Rounded Rectangle Popup */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            padding: 2rem;
+            background: linear-gradient(135deg, #a2f5b6, #ffb6c1);
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            animation: popup-scale 0.5s ease-in-out;
+        }
+
+        .popup h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #67c796;
+        }
+
+        .popup p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+        }
+
+        .popup img {
+            width: 200px;
+            height: auto;
+            margin: 1rem auto;
+        }
+
+        .popup button {
+            background: #67c796;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .popup button:hover {
+            background: #83dfb0;
+            transform: scale(1.1);
+        }
+
+        @keyframes popup-scale {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="heart" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+    <div class="heart green" style="top: 50%; left: 70%; animation-delay: 2s;"></div>
+    <div class="heart" style="top: 30%; left: 40%; animation-delay: 4s;"></div>
+    <div class="heart green" style="top: 80%; left: 15%; animation-delay: 6s;"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="title">Hey Ruchir! 💚</div>
+        <div class="message">
+            Remember Freshers?I was not good at expressing then or even now i just always did things before saying it. I guess i kept on doing things and you accepted it all but there is a thing i did very less called initiating-going up to you-make you feel the same special but <br><br>
+            I’ve been meaning to ask something for a while, Can I? <br><br>
+            <button onclick="showQuestion()">Yes</button>
+        </div>
+    </div>
+
+    <!-- Question Popup -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup" id="popup">
+            <h2>Will you be my Valentine, Ruchir? 💕</h2>
+            <button onclick="showCongrats()">Yes</button>
+        </div>
+    </div>
+
+    <!-- Congratulations Popup -->
+    <div class="popup-overlay" id="congrats-overlay">
+        <div class="popup">
+            <h2>Congratulations! 🎉</h2>
+            <p>Ruchir, you’re officially Savi's Valentine! Rules and rewards will be explained later💚💕</p>
+            <button onclick="closeCongrats()">Yay! 💖</button>
+        </div>
+    </div>
+
+    <script>
+        // Show Question Popup
+        function showQuestion() {
+            document.getElementById('popup-overlay').style.display = 'block';
+        }
+
+        // Show Congratulations Popup with Cat GIF
+        function showCongrats() {
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.getElementById('congrats-overlay').style.display = 'block';
+        }
+
+        // Close Congratulations Popup
+        function closeCongrats() {
+            document.getElementById('congrats-overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
